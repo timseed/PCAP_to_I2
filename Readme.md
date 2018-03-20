@@ -2,9 +2,16 @@
 
 I often need to get data into I2 for some quick analysis, and today I was able to spend a little time to format the data, to take the pain out of the I2 Analysis Phase.
 
+I am trying to look at a data flow, which I2 will already do well.
+
+But I want to enhance the process by
+   - Indicate if it is TCP or UDP
+   - enhace IP Addresses  by adding NodeNames 
+   - add the Socket type i.e. 21 is FTP etc
+
 # Prerequisits
 
-You will need the following
+You will need the following packages
 
   - python-scapy3
   - daiquiri
@@ -19,6 +26,10 @@ You will need the following
  I wrote this so that I can quickly import PCAP data files into IBM's I2 product.
  
  So to start off with you need a PCAP file. 
+ 
+     tcpdump -i en0 -w bbc.pcapng
+ 
+ And then in a Web browser open [http://www.bbc.com](http://www.bbc.com)
  
  With your PCAP(ng) file, you just put the data files to be converted into the **./data** directory, and then you run the **main.py**.
  
@@ -108,14 +119,18 @@ This looks like this
 
 ![](.Readme_images/img1.png)
 
-Which looks pretty bad. 
+Which visually initially does not look very interesting.
 
 I now import the **hosts**.csv (Again using a different Custom I2 Loader)
 And finally the **ports**.csv (With yet another custom Loader).
 
-![](.Readme_images/21862872.png)
+Finally I perform a **Compact Chart** and I now see 
 
 And I get this scary looking image. 
+
+
+![](.Readme_images/21862872.png)
+
 
 I hope this has shown how you can use and automate data loading for I2 Anayst Notebook, when using IP data. 
 
