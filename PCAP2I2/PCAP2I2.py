@@ -169,12 +169,16 @@ class PCAP2I2(object):
                     ipmatch = True
                 if p.haslayer(TCP):
                     txt += "TCP ,{:<7},{:<7}".format(p[TCP].sport, p[TCP].dport)
+                    if int(p[TCP].sport) > 49152:  #Client temp sockets should start from here
+                        ipmatch = False
                 elif p.haslayer(UDP):
                     txt += "UDP ,{:<7},{:<7}".format(p[UDP].sport, p[UDP].dport)
                 else:
                     txt += "UNK ,{:<7},{:<7}".format("0", "0")
                     if omit_unknown:
                         ipmatch=False
+
+
                 # We need to make sure we have one of the IP Strings in the txt
 
                 if ipmatch == True:
